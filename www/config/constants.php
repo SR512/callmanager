@@ -12,4 +12,5 @@ return [
     'APP_VERSION' => env('APP_VERSION', '1.0'),
     'LOGO_FILE_NAME' => 'logo-dark.png',
     'DEVELOPED_BY' => 'Zero technology',
+    'SMS_API_URL' =>'http://loginbulk.krishivgroups.com'
 ];

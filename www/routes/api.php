@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [\App\Http\Controllers\Api\ApiController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('get-user', [\App\Http\Controllers\Api\ApiController::class, 'userInfo']);
+    Route::post('register-device', [\App\Http\Controllers\Api\ApiController::class, 'registerDevice']);
+    Route::post('register-device-info', [\App\Http\Controllers\Api\ApiController::class, 'deviceInfo']);
+    Route::post('send-sms', [\App\Http\Controllers\Api\ApiController::class, 'sendMessage']);
 
 });
 
