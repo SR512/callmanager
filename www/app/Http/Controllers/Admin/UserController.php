@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\SmSConfigurationRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UserRequest;
 use App\Mail\UserCreateNotification;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -64,6 +66,60 @@ class UserController extends Controller
         return response()->json($data);
     }
 
+    public function setSMSConfiguration($id)
+    {
+        $data = [];
+        try {
+            $user = resolve('user-repo')->findByID($id);
+            $data['error'] = false;
+            $data['view'] = view('admin.usermanagement.sms_configuration_offcanvas', compact('user'))->render();
+            return response()->json($data);
+
+        } catch (\Exception $e) {
+            $data['error'] = true;
+            $data['message'] = $e->getMessage();
+        }
+        return response()->json($data);
+    }
+
+    public function storeSMSConfiguration(SmSConfigurationRequest $request)
+    {
+        $data = $params = [];
+        DB::beginTransaction();
+        try {
+            $params['user_id'] = $request->user_id;
+            $params['api_key'] = $request->api_key;
+            $params['username'] = $request->username;
+            $params['sender_name'] = $request->sender_name;
+            $params['sms_type'] = $request->sms_type;
+
+            $smsconfiguration = resolve('smsconfiguration-repo')->create($params);
+
+            if (!empty($smsconfiguration)) {
+
+                $params = [];
+                $params['page'] = $request->page ?? 0;
+                $data['error'] = false;
+                $data['message'] = 'Sms configuration updated successfully.';
+                $data['view'] = resolve('user-repo')->renderHtmlTable($params);
+
+                DB::commit();
+                return response()->json($data);
+
+            }
+
+            $data['error'] = true;
+            $data['message'] = 'Sms configuration not updated.';
+            return response()->json($data);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data['error'] = true;
+            $data['message'] = $e->getMessage();
+            return response()->json($data);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -80,6 +136,10 @@ class UserController extends Controller
             $params['name'] = $request->name;
             $params['email'] = $request->email;
             $params['password'] = Hash::make($request->password);
+            $params['expiry_date'] = $request->expiry_date;
+            $params['remember_token'] = Str::random(10);
+            $params['message'] = $request->message;
+            $params['device'] = $request->device;
 
             $user = resolve('user-repo')->create($params);
 
@@ -170,6 +230,9 @@ class UserController extends Controller
             $params['role'] = $request->role;
             $params['name'] = $request->name;
             $params['email'] = $request->email;
+            $params['expiry_date'] = $request->expiry_date;
+            $params['message'] = $request->message;
+            $params['device'] = $request->device;
 
             $user = resolve('user-repo')->update($params, $id);
 
@@ -200,17 +263,20 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        DB::beginTransaction();
         try {
             $user = resolve('user-repo')->findById($id);
             if (!empty($user)) {
-
+                $user->devices()->delete();
                 $user->delete();
+                DB::commit();
                 toastr()->success($user->name . ' deleted successfully..!');
                 return redirect()->route('usermanagement.index');
             } else {
                 toastr()->error('User not found.!');
             }
         } catch (\Exception $e) {
+            DB::rollBack();
             toastr()->error($e->getMessage());
             return redirect()->back();
         }

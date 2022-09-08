@@ -29,6 +29,9 @@ class UserRequest extends FormRequest
             'role' => 'required',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'message' => 'required|numeric',
+            'expiry_date' => 'required|max:255',
+            'device' => 'required|numeric',
         ];
 
         if (in_array(request()->route()->getName(),$routes)) {

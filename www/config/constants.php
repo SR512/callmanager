@@ -4,6 +4,7 @@ return [
     'CC_EMAILS' => [],
     'PER_PAGE' => 10,
     'SUPER_ADMIN' => 'Super Admin',
+    'USER' => 'user',
     // FILE UPLOAD PATH
     'USER_DOC_PATH' => 'public' . DIRECTORY_SEPARATOR,
     'USER_DOC_URL' => 'storage' . DIRECTORY_SEPARATOR,

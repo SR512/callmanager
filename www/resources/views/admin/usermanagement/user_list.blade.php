@@ -17,8 +17,9 @@
                 <div class="card-body">
                     <div class="float-end">
                         @can('usermanagements.create')
-                        <a href="{{route('usermanagements.create')}}" onclick="showSaveModel(event)" class="btn btn-primary"><i
-                                class="mdi mdi-account-plus"></i>&nbsp;Add User</a>
+                            <a href="{{route('usermanagements.create')}}" onclick="showSaveModel(event)"
+                               class="btn btn-primary"><i
+                                    class="mdi mdi-account-plus"></i>&nbsp;Add User</a>
                         @endcan
                     </div>
                     <div class="float-start">
@@ -29,7 +30,8 @@
                         <div class="form-group">
                             {!! Form::select('role',$roles,request()->query('role'),['class'=>'form-control zone','placeholder'=>'Select role']) !!}
                         </div>
-                        <button type="submit" name="type" value="submit" class="btn btn-primary waves-effect waves-light">
+                        <button type="submit" name="type" value="submit"
+                                class="btn btn-primary waves-effect waves-light">
                             Submit
                         </button>
                         &nbsp;
@@ -60,5 +62,17 @@
                 e.preventDefault();
             }
         });
+        $(".row_expand").on('click', function () {
+            if ($(this).children().hasClass('fa-plus')) {
+                $(this).children().removeClass('fa-plus');
+                $(this).children().addClass('fa-minus');
+                $($(this).data('target')).addClass('show')
+            } else {
+                $(this).children().addClass('fa-plus');
+                $(this).children().removeClass('fa-minus');
+                $($(this).data('target')).removeClass('show')
+            }
+        });
+
     </script>
 @endsection

@@ -28,6 +28,9 @@ class User extends Authenticatable
         'logins',
         'last_login_ip',
         'last_login_at',
+        'expiry_date',
+        'message',
+        'device',
     ];
 
     /**
@@ -39,7 +42,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast to native types.
      *
@@ -49,9 +51,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function devices(){
+        return $this->hasMany(Devices::class,'user_id','id');
+    }
+    public function sms_configuration(){
+        return $this->hasOne(SmsConfiguration::class,'user_id','id');
+    }
     public function getCreatedAtFormattedAttribute()
     {
         return Carbon::parse($this->created_at)->format('d-m-Y H:i');
+    }
+    public function getExpiryDateAtFormattedAttribute()
+    {
+        return !empty($this->expiry_date)?Carbon::parse($this->expiry_date)->format('d-m-Y'):'';
     }
     public function sendPasswordResetNotification($token)
     {
@@ -59,5 +71,8 @@ class User extends Authenticatable
         $params['token'] = $token;
         $params['email'] = $this->email;
         Mail::send(new ResetPasswordMail($params));
+    }
+    public function getRole(){
+        return auth()->user()->getRoleNames()->first();
     }
 }

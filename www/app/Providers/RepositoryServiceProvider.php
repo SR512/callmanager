@@ -3,11 +3,14 @@
 namespace App\Providers;
 
 use App\Repositories\CommonRepository;
+use App\Repositories\DeviceRepository;
 use App\Repositories\EyeReviewDocumentsRepository;
 use App\Repositories\EyeReviewDetailsRepository;
 use App\Repositories\EyeReviewRepository;
 use App\Repositories\PatientDetailsRepository;
 use App\Repositories\RoleRepository;
+use App\Repositories\SMSConfigurationRepository;
+use App\Repositories\SMSLogRepository;
 use App\Repositories\StentRegistryRepository;
 use App\Repositories\TrustRepository;
 use App\Repositories\UserRepository;
@@ -39,5 +42,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton('role-repo', RoleRepository::class);
         $this->app->singleton('user-repo', UserRepository::class);
         $this->app->singleton('common-repo', CommonRepository::class);
+        $this->app->singleton('device-repo', DeviceRepository::class);
+        $this->app->singleton('smsconfiguration-repo', SMSConfigurationRepository::class);
+        $this->app->singleton('sms-log-repo', SMSLogRepository::class);
     }
 }

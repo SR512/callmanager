@@ -6,19 +6,21 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0.3",
+        "barryvdh/laravel-dompdf": "^1.0.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-		"laravelcollective/html": "^6.2",
+        "laravelcollective/html": "^6.2",
+        "maatwebsite/excel": "^3.1",
         "proengsoft/laravel-jsvalidation": "^4.5",
+        "psr/simple-cache": "2.0",
         "spatie/laravel-database-mail-templates": "^3.4",
         "spatie/laravel-permission": "^5.1",
         "yajra/laravel-datatables-oracle": "^9.18",
-        "yoeunes/toastr": "^1.2",
-		"barryvdh/laravel-dompdf": "^1.0.0"
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^1.0",

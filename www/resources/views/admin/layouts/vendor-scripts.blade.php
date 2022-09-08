@@ -4,6 +4,8 @@
 <script src="{{ URL::asset('assets/libs/metismenu/metismenu.min.js')}}"></script>
 <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
 <script src="{{ URL::asset('assets/libs/node-waves/node-waves.min.js')}}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 
 @yield('script')

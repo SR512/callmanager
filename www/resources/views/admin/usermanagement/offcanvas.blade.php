@@ -41,6 +41,48 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <div class="form-group">
+                            {!!  Form::label('expiry_date', 'Expiry date',['style' =>'justify-content: right']); !!}<span
+                                class="required">*</span>
+                            {!! Form::date('expiry_date',isset($user) ? $user->expiry_date:old('expiry_date'),['class' => 'form-control','id' =>'expiry_date'])!!}
+                            @error('expiry_date')
+                            <span style="color:red">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <div class="form-group">
+                            {!!  Form::label('message', 'Message',['style' =>'justify-content: right']); !!}<span
+                                class="required">*</span>
+                            {!! Form::number('message',isset($user) ? $user->message:old('message'),['class' => 'form-control','id' =>'message'])!!}
+                            @error('message')
+                            <span style="color:red">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <div class="form-group">
+                            {!!  Form::label('device', 'Device',['style' =>'justify-content: right']); !!}<span
+                                class="required">*</span>
+                            {!! Form::number('device',isset($user) ? $user->device:old('device'),['class' => 'form-control','id' =>'device'])!!}
+                            @error('device')
+                            <span style="color:red">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-12">
