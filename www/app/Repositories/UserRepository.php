@@ -79,6 +79,10 @@ class UserRepository
             });
         });
 
+        $this->model = $this->model->when(!empty($params['start_date'] && !empty($params['end_date'])), function ($q) use ($params) {
+            return $q->whereBetween('created_at', [$params['start_date'], $params['end_date']]);
+        });
+
         $this->model = $this->model->whereHas('roles', function ($query) {
             $query->whereNot('name', config('constants.SUPER_ADMIN'));
         });

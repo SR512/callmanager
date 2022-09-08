@@ -28,6 +28,10 @@
                             {!! Form::text('query_str',request()->query('query_str'),['class'=>'form-control','placeholder'=>'Search by name / email','style="width: 330px;"']) !!}
                         </div>
                         <div class="form-group">
+                            @component('components.date-picker-component')
+                            @endcomponent
+                        </div>
+                        <div class="form-group">
                             {!! Form::select('role',$roles,request()->query('role'),['class'=>'form-control zone','placeholder'=>'Select role']) !!}
                         </div>
                         <button type="submit" name="type" value="submit"

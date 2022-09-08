@@ -14,6 +14,7 @@ use App\Models\Language;
 use App\Models\Role;
 use App\Models\State;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -35,6 +36,15 @@ class UserController extends Controller
         $params['query_str'] = $request->query_str;
         $params['role'] = $request->role;
         $params['page'] = $request->page ?? 0;
+
+        if (!empty($request->start_date) && !empty($request->start_date)) {
+            $params['start_date'] = Carbon::parse($request->start_date)->format('Y-m-d 00:00:00');
+            $params['end_date'] = Carbon::parse($request->end_date)->format('Y-m-d 23:59:00');
+        } else {
+            $params['start_date'] = Carbon::now()->subDays(7)->format('Y-m-d 00:00:00');
+            $params['end_date'] = Carbon::now()->format('Y-m-d 23:59:00');
+        }
+
         $table = resolve('user-repo')->renderHtmlTable($params);
 
         $skip_roles = [config('constants.SUPER_ADMIN')];
