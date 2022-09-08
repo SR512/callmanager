@@ -57,7 +57,7 @@
         </div>
     </div>
 @endsection
-@section('script')
+@section('script-bottom')
     <script type="text/javascript" src="{{ asset('assets/vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/user.js')}}"></script>
     <script type="text/javascript">

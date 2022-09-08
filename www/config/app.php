@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         \App\Providers\RepositoryServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*
