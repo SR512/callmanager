@@ -166,6 +166,13 @@ class UserController extends Controller
 
                 $params = [];
                 $params['page'] = $request->page ?? 0;
+                if (!empty($request->start_date) && !empty($request->start_date)) {
+                    $params['start_date'] = Carbon::parse($request->start_date)->format('Y-m-d 00:00:00');
+                    $params['end_date'] = Carbon::parse($request->end_date)->format('Y-m-d 23:59:00');
+                } else {
+                    $params['start_date'] = Carbon::now()->subDays(7)->format('Y-m-d 00:00:00');
+                    $params['end_date'] = Carbon::now()->format('Y-m-d 23:59:00');
+                }
                 $data['error'] = false;
                 $data['message'] = 'User create successfully.';
                 $data['view'] = resolve('user-repo')->renderHtmlTable($params);
@@ -251,6 +258,13 @@ class UserController extends Controller
 
                 $params = [];
                 $params['page'] = $request->page ?? 0;
+                if (!empty($request->start_date) && !empty($request->start_date)) {
+                    $params['start_date'] = Carbon::parse($request->start_date)->format('Y-m-d 00:00:00');
+                    $params['end_date'] = Carbon::parse($request->end_date)->format('Y-m-d 23:59:00');
+                } else {
+                    $params['start_date'] = Carbon::now()->subDays(7)->format('Y-m-d 00:00:00');
+                    $params['end_date'] = Carbon::now()->format('Y-m-d 23:59:00');
+                }
                 $data['error'] = false;
                 $data['message'] = 'User update successfully.';
                 $data['view'] = resolve('user-repo')->renderHtmlTable($params);
