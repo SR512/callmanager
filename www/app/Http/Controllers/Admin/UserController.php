@@ -160,6 +160,7 @@ class UserController extends Controller
                 $params['user'] = $user->name;
                 $params['email'] = $request->email;
                 $params['password'] = $request->password;
+                $params['role_name'] = $user->getRoleNames()->first();
 
                 Mail::send(new UserCreateNotification($params));
 
