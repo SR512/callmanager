@@ -161,7 +161,7 @@ class UserController extends Controller
                 $params['email'] = $request->email;
                 $params['password'] = $request->password;
 
-                //Mail::send(new UserCreateNotification($params));
+                Mail::send(new UserCreateNotification($params));
 
                 $params = [];
                 $params['page'] = $request->page ?? 0;
