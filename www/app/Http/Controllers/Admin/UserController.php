@@ -141,15 +141,25 @@ class UserController extends Controller
         $data = $params = [];
         DB::beginTransaction();
         try {
+
+            $password = Str::random($length = 8);
             // Create user
             $params['role'] = $request->role;
             $params['name'] = $request->name;
             $params['email'] = $request->email;
-            $params['password'] = Hash::make($request->password);
+            $params['password'] = Hash::make($password);
             $params['expiry_date'] = $request->expiry_date;
             $params['remember_token'] = Str::random(10);
             $params['message'] = $request->message;
             $params['device'] = $request->device;
+
+            $isUserExists = User::where('email', $request->email)->exists();
+
+            if (!empty($isUserExists)) {
+                $data['error'] = true;
+                $data['message'] = 'User already created..!';
+                return response()->json($data);
+            }
 
             $user = resolve('user-repo')->create($params);
 
@@ -159,7 +169,7 @@ class UserController extends Controller
                 $params = [];
                 $params['user'] = $user->name;
                 $params['email'] = $request->email;
-                $params['password'] = $request->password;
+                $params['password'] = $password;
                 $params['role_name'] = $user->getRoleNames()->first();
 
                 Mail::send(new UserCreateNotification($params));
