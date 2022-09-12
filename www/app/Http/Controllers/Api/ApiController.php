@@ -289,7 +289,7 @@ class ApiController extends Controller
                 return response()->json($data, 200);
             }
 
-            $url = config('constants.SMS_API_URL') . "/sendSMS?username=" . $username . "&message=" . $request->message . "&sendername=" . $sender_name . "&smstype=" . $sms_type . "&numbers=" . $request->number . "&apikey=" . $api_key;
+            $url = config('constants.SMS_API_URL') . "/sendSMS?username=" . $username . "&message=" . urlencode($request->message) . "&sendername=" . $sender_name . "&smstype=" . $sms_type . "&numbers=" . $request->number . "&apikey=" . $api_key;
 
             $response = Http::get($url);
 
