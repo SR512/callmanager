@@ -303,7 +303,7 @@ class ApiController extends Controller
                     $smslog = resolve('sms-log-repo')->create($params);
 
                     $user = User::where('id', $request->user_id)->first();
-                    $user->message = $username->message - 1;
+                    $user->message = $user->message - 1;
                     $user->save();
 
                     $data['error'] = false;
