@@ -323,10 +323,10 @@
 {{--                </div>--}}
 {{--            </div>--}}
 
-            <div class="dropdown d-none d-lg-inline-block ms-1">
-                <a type="button" href="{{asset('apk/callmanager-v1.0.apk')}}" target="_blank" class="btn header-item noti-icon waves-effect">
-                    <i class="bx bx-download"></i>&nbsp;Download apk
-                </a>
+            <div class="dropdown d-none d-lg-inline-block mt-auto">
+                <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+                    <i class="bx bx-fullscreen"></i>
+                </button>
             </div>
 
 {{--            <div class="dropdown d-inline-block">--}}
