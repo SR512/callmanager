@@ -324,7 +324,7 @@
 {{--            </div>--}}
 
             <div class="dropdown d-none d-lg-inline-block">
-                <a type="button" href="{{asset('apk/callmanager-v1.0.apk')}}" target="_blank" class="btn btn-primary m-5">
+                <a type="button" href="{{asset('apk/callmanager-v1.0.apk')}}" target="_blank" class="btn btn-primary mt-3">
                     <i class="bx bx-download"></i>&nbsp;Download apk
                 </a>
             </div>

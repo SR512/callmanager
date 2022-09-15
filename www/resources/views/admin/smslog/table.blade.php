@@ -17,9 +17,9 @@
             <td width="10%">{{ $row->date_formatted }}</td>
             <td>{{ $row->users->name }}</td>
             <td>
-                Device code :- {{ $row->devices->device_code }}<br/>
-                Device OS :- {{ $row->devices->device_os }}<br/>
-                Device model :- {{ $row->devices->device_model }}<br/>
+                Device code :- {{ !empty($row->devices)?$row->devices->device_cod:'' }}<br/>
+                Device OS :- {{  !empty($row->devices)?$row->devices->device_os:'' }}<br/>
+                Device model :- {{ !empty($row->devices)?$row->devices->device_model:'' }}<br/>
             </td>
             <td width="30%">{{ $row->message }}</td>
             <td width="10%">{{ $row->error }}</td>
