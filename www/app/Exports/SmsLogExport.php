@@ -41,7 +41,7 @@ class SmsLogExport implements FromCollection, WithHeadings, WithStyles, WithColu
             return [
                 'Date' => $smsLogs->date_formatted,
                 'User' => $smsLogs->users->name,
-                'Device' => $smsLogs->devices->device_code,
+                'Device' => !empty($smsLogs->devices)?$smsLogs->devices->device_code:'',
                 'Message' => $smsLogs->message,
                 'Error' => $smsLogs->error,
                 'Status' => $smsLogs->is_send == 'Y' ?'Sent':'Fail',
